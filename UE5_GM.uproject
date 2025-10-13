@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{EB519E28-4321-03E5-7671-409D5DF8C12A}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "UE5_GM",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}
