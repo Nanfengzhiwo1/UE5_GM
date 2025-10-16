@@ -3,7 +3,40 @@
 
 #include "GM/GMCheatManager.h"
 
+#include "Blueprint/UserWidget.h"
 #include "GM/Extensions/BaseExtension.h"
+#include "GM/UI/GMPanel.h"
+
+void UGMCheatManager::OpenGMPanel()
+{
+	if (!GMPanelClass)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("GMPanelClass is null"));
+		return;
+	}
+
+	if (!GMPanel)
+	{
+		GMPanel = CreateWidget<UGMPanel>(GetWorld(), GMPanelClass);
+		if (GMPanel)
+		{
+			GMPanel->AddToViewport();
+		}
+	}
+	else
+	{
+		GMPanel->SetVisibility(ESlateVisibility::Visible);
+	}
+	
+}
+
+void UGMCheatManager::CloseGMPanel()
+{
+	if (GMPanel)
+	{
+		GMPanel->SetVisibility(ESlateVisibility::Collapsed);
+	}
+}
 
 void UGMCheatManager::InitCheatManager()
 {
