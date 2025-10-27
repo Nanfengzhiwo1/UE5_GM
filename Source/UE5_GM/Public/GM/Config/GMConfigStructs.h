@@ -6,43 +6,69 @@
 #include "Engine/DataTable.h"
 #include "GMConfigStructs.generated.h"
 
-USTRUCT(BlueprintType)
+UENUM(BlueprintType)
+enum class EGMTabType : uint8
+{
+	Character UMETA(DisplayName="Character"),
+	Camera UMETA(DisplayName="Camera"),
+	Debug UMETA(DisplayName="Debug"),
+	UserInterface UMETA(DisplayName="UserInterface"),
+};
+
+UENUM(BlueprintType)
+enum class EGMItemType : uint8
+{
+	Default UMETA(DisplayName="Default"),
+};
+
+USTRUCT(BlueprintType )
 struct FGMItemStructs 
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GMItem")
+	UPROPERTY(EditAnywhere, Category="GMItem")
 	FString GMItemID;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GMItem")
+	UPROPERTY(EditAnywhere, Category="GMItem")
 	FName GMItemName;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GMItem")
-	FString GMItemType;
+	UPROPERTY(EditAnywhere, Category="GMItem")
+	EGMItemType GMItemType;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GMItem")
-	uint8 GMItemIndex;
+	UPROPERTY(EditAnywhere, Category="GMItem")
+	int32 GMItemIndex;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GMItem")
+	UPROPERTY(EditAnywhere, Category="GMItem")
 	FString GMItemDescription;
+
+	FGMItemStructs()
+	: GMItemID("")
+	, GMItemName(NAME_None)
+	, GMItemType(EGMItemType::Default)
+	, GMItemIndex(0)
+	, GMItemDescription("")
+	{}
 };
 
 
 
-USTRUCT(BlueprintType)
-struct FGMTabStructs : public FTableRowBase
+USTRUCT(BlueprintType )
+struct FGMConfigStructs : public FTableRowBase
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GMTab")
-	FString GMTabID;
+	UPROPERTY(EditAnywhere, Category="GMTab")
+	EGMTabType GMTabType;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GMTab")
-	FName GMTabName;
+	UPROPERTY(EditAnywhere, Category="GMTab")
+	int32 GMTabIndex;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GMTab")
-	uint8 GMTabIndex;
+	UPROPERTY(EditAnywhere, Category="GMTab")
+	TArray<FGMItemStructs> GMItems;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="GMTab")
-	TArray<FGMItemStructs> GMTabTabs;
+	FGMConfigStructs()
+	: GMTabType(EGMTabType::Character)
+	, GMTabIndex(0)
+	, GMItems()
+	{}
 };
