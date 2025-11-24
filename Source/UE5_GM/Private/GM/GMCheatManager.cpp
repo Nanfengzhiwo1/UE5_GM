@@ -9,12 +9,6 @@
 
 void UGMCheatManager::OpenGMPanel()
 {
-	if (!GMPanelClass)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("GMPanelClass is null"));
-		return;
-	}
-
 	if (!GMPanel)
 	{
 		GMPanel = CreateWidget<UGMPanel>(GetWorld(), GMPanelClass);
